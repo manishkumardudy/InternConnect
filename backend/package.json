@@ -1,0 +1,25 @@
+{
+  "name": "internconnect-backend",
+  "version": "1.0.0",
+  "description": "InternConnect Backend API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^9.0.3",
+    "pdfkit": "^0.19.1",
+    "razorpay": "^2.9.8",
+    "socket.io": "^4.7.5",
+    "ua-parser-js": "^2.0.10"
+  }
+}

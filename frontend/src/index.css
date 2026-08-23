@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased selection:bg-sky-200 dark:selection:bg-sky-900 transition-colors duration-300;
+    font-family: 'Inter', 'Outfit', sans-serif;
+  }
+
+  /* Micro-animation transitions for all buttons and interactive elements */
+  button, a {
+    @apply transition-all duration-200;
+  }
+
+  /* Glowing focus ring for input fields */
+  input:focus, select:focus, textarea:focus {
+    @apply ring-2 ring-sky-500/30 border-sky-500 outline-none dark:ring-sky-400/40 dark:border-sky-400;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-100 dark:bg-slate-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full hover:bg-slate-400 dark:hover:bg-slate-600 transition-colors;
+}
+
+/* Keyframe Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.dark .animate-shimmer {
+  background: linear-gradient(90deg, #0f172a 25%, #1e293b 50%, #0f172a 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Success Pop & Radiating Ring Keyframes for Payment Celebratory Modal */
+@keyframes successPop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.18); opacity: 1; }
+  80% { transform: scale(0.95); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes ringExpand {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+@keyframes slideUpFade {
+  0% { transform: translateY(16px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-success-pop {
+  animation: successPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.animate-ring-expand {
+  animation: ringExpand 1.2s ease-out infinite;
+}
+
+.animate-slide-up-fade {
+  animation: slideUpFade 0.5s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+/* Glassmorphism Styles */
+.glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark .glass {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Interactive Card Lifts & Hover Zoom */
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-sky-300 dark:hover:border-sky-500 hover:scale-[1.01];
+}
+
+/* Button Micro-interactions */
+.btn-animate {
+  @apply transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:shadow-md;
+}
+
+/* Navbar Link Hover Underline */
+.nav-link {
+  @apply relative py-1 text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-sky-600 dark:after:bg-sky-400 after:transition-all after:duration-300 hover:after:w-full;
+}
+
+.nav-link-active {
+  @apply text-sky-600 dark:text-sky-400 font-semibold after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-sky-600 dark:after:bg-sky-400;
+}
+
+/* Page fade-in */
+.fade-in {
+  animation: fadeIn 0.35s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "_id": "6a5fbb261d20209094bdd053",
+    "listingId": "6a5fb61a4537895bf1c7ae0e",
+    "studentId": "6a5fb61a78213e47327c2188",
+    "resumeUrlSnapshot": "http://localhost:5000/uploads/sample-resume.pdf",
+    "coverNote": "dufh oiagosgik",
+    "status": "applied",
+    "statusUpdatedAt": "2026-07-21T18:32:06.830Z",
+    "createdAt": "2026-07-21T18:32:06.834Z",
+    "updatedAt": "2026-07-21T18:32:06.834Z"
+  },
+  {
+    "_id": "6a5fbb3786cc273d6c93c15b",
+    "listingId": "6a5fb61a88ac11c8af5989f5",
+    "studentId": "6a5fb61a78213e47327c2188",
+    "resumeUrlSnapshot": "http://localhost:5000/uploads/sample-resume.pdf",
+    "coverNote": "adjklf hgaogi",
+    "status": "applied",
+    "statusUpdatedAt": "2026-07-21T18:32:23.952Z",
+    "createdAt": "2026-07-21T18:32:23.952Z",
+    "updatedAt": "2026-07-21T18:32:23.952Z"
+  }
+]

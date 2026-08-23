@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Environment variables
+.env
+.env.*
+*/.env
+*/.env.*
+!.env.example
+*/!.env.example
+
+# Build & Dist
+dist/
+dist-ssr/
+*/dist/
+build/
+
+# Uploads & generated files
+uploads/
+*/uploads/
+generated_resumes/
+*/generated_resumes/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archives
+*.zip
+*.tar.gz
