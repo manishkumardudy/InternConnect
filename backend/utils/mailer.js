@@ -2,11 +2,17 @@ const axios = require('axios');
 
 /**
  * Retrieves the Brevo API Key from environment variables.
- * Supports BREVO_API_KEY or fallback to SMTP_PASS.
+ * Checks BREVO_API_KEY first, then falls back to SMTP_PASS.
  */
 const getBrevoApiKey = () => {
   return (process.env.BREVO_API_KEY || process.env.SMTP_PASS || '').trim();
 };
+
+// Startup diagnostics (runs once when module loads at server boot)
+console.log('[mailer] BREVO_API_KEY present:', !!process.env.BREVO_API_KEY);
+console.log('[mailer] SMTP_PASS present:', !!process.env.SMTP_PASS);
+console.log('[mailer] Resolved API key found:', !!getBrevoApiKey());
+console.log('[mailer] NODE_ENV:', process.env.NODE_ENV);
 
 /**
  * Extracts and formats the sender object for Brevo transactional email API.
@@ -37,7 +43,7 @@ const sendBrevoEmail = async ({ toEmail, toName, subject, htmlContent, devFallba
   const apiKey = getBrevoApiKey();
 
   if (!apiKey) {
-    console.log(`[DEV MODE - No Brevo API Key] ${devFallbackText || subject} for ${toEmail}`);
+    console.warn(`[mailer] NO API KEY FOUND — falling back to DEV MODE. Email will NOT be sent to ${toEmail}. OTP/content: ${devFallbackText || subject}`);
     return { devMode: true, success: true };
   }
 
@@ -64,6 +70,7 @@ const sendBrevoEmail = async ({ toEmail, toName, subject, htmlContent, devFallba
       timeout: 10000
     });
 
+    console.log('[mailer] Brevo API response status:', response.status, 'messageId:', response.data?.messageId);
     console.log(`Brevo HTTP API email successfully sent to ${toEmail} (MessageId: ${response.data?.messageId || 'OK'})`);
     return { devMode: false, success: true, messageId: response.data?.messageId };
   } catch (error) {
