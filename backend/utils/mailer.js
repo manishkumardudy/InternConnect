@@ -1,57 +1,99 @@
-const nodemailer = require('nodemailer');
+const axios = require('axios');
 
-const getTransporter = () => {
-  return nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp-relay.brevo.com',
-    port: Number(process.env.SMTP_PORT) || 587,
-    secure: false,
-    family: 4, // Force IPv4 to prevent ENETUNREACH errors on cloud servers
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS
-    }
-  });
+/**
+ * Retrieves the Brevo API Key from environment variables.
+ * Supports BREVO_API_KEY or fallback to SMTP_PASS.
+ */
+const getBrevoApiKey = () => {
+  return (process.env.BREVO_API_KEY || process.env.SMTP_PASS || '').trim();
 };
 
-const sendPasswordResetEmail = async (toEmail, newPassword) => {
-  const smtpUser = process.env.SMTP_USER;
-  const smtpPass = process.env.SMTP_PASS;
+/**
+ * Extracts and formats the sender object for Brevo transactional email API.
+ */
+const getSender = () => {
+  const rawSender = (process.env.BREVO_SENDER_EMAIL || process.env.SMTP_FROM || process.env.SMTP_USER || 'no-reply@internconnect.com').trim();
+  const defaultName = (process.env.BREVO_SENDER_NAME || 'InternConnect').trim();
 
-  if (!smtpUser || !smtpPass) {
-    console.log(`[DEV MODE] Password reset for ${toEmail}: ${newPassword}`);
+  const match = rawSender.match(/(?:(.+)\s+)?<?([^<>@\s]+@[^<>@\s]+)>?$/);
+  if (match) {
+    return {
+      name: (match[1] || defaultName).replace(/['"]/g, '').trim(),
+      email: match[2].trim()
+    };
+  }
+
+  return {
+    name: defaultName,
+    email: rawSender
+  };
+};
+
+/**
+ * Sends transactional email via Brevo REST HTTP API (Port 443 HTTPS).
+ * Eliminates raw TCP/SMTP socket timeouts and port-blocking issues on cloud hosts like Render.
+ */
+const sendBrevoEmail = async ({ toEmail, toName, subject, htmlContent, devFallbackText }) => {
+  const apiKey = getBrevoApiKey();
+
+  if (!apiKey) {
+    console.log(`[DEV MODE - No Brevo API Key] ${devFallbackText || subject} for ${toEmail}`);
     return { devMode: true, success: true };
   }
 
   try {
-    const transporter = getTransporter();
+    const sender = getSender();
+    const payload = {
+      sender,
+      to: [
+        {
+          email: toEmail,
+          name: toName || toEmail.split('@')[0]
+        }
+      ],
+      subject,
+      htmlContent
+    };
 
-    await transporter.sendMail({
-      from: process.env.SMTP_FROM || `"InternConnect" <${smtpUser}>`,
-      to: toEmail,
-      subject: 'Your Password Has Been Reset - InternConnect',
-      html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
-          <h2>InternConnect Password Reset</h2>
-          <p>A new password has been generated for your account.</p>
-          <p>Your new temporary password is: <strong style="font-size: 16px; color: #0284c7;">${newPassword}</strong></p>
-          <p>Please log in with this new password.</p>
-        </div>
-      `
+    const response = await axios.post('https://api.brevo.com/v3/smtp/email', payload, {
+      headers: {
+        'accept': 'application/json',
+        'api-key': apiKey,
+        'content-type': 'application/json'
+      },
+      timeout: 10000
     });
 
-    console.log(`Password reset email successfully sent to ${toEmail}`);
-    return { devMode: false, success: true };
+    console.log(`Brevo HTTP API email successfully sent to ${toEmail} (MessageId: ${response.data?.messageId || 'OK'})`);
+    return { devMode: false, success: true, messageId: response.data?.messageId };
   } catch (error) {
-    console.error('SMTP Mailer Error, falling back to log:', error.message);
-    console.log(`[DEV MODE] Password reset for ${toEmail}: ${newPassword}`);
-    return { devMode: true, success: true };
+    const errorMsg = error.response?.data?.message || error.message;
+    console.error(`Brevo API Error sending to ${toEmail}:`, errorMsg);
+    console.log(`[DEV MODE FALLBACK] ${devFallbackText || subject} for ${toEmail}`);
+    return { devMode: true, success: true, error: errorMsg };
   }
 };
 
-const sendInvoiceEmail = async (toEmail, invoiceDetails, name) => {
-  const smtpUser = process.env.SMTP_USER;
-  const smtpPass = process.env.SMTP_PASS;
+const sendPasswordResetEmail = async (toEmail, newPassword) => {
+  const subject = 'Your Password Has Been Reset - InternConnect';
+  const htmlContent = `
+    <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
+      <h2>InternConnect Password Reset</h2>
+      <p>A new password has been generated for your account.</p>
+      <p>Your new temporary password is: <strong style="font-size: 16px; color: #0284c7;">${newPassword}</strong></p>
+      <p>Please log in with this new password.</p>
+    </div>
+  `;
 
+  return sendBrevoEmail({
+    toEmail,
+    subject,
+    htmlContent,
+    devFallbackText: `Password reset for ${toEmail}: ${newPassword}`
+  });
+};
+
+const sendInvoiceEmail = async (toEmail, invoiceDetails, name) => {
   const subject = `Payment Receipt: ${invoiceDetails.planName} Plan - InternConnect`;
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; padding: 24px; color: #1e293b; max-width: 600px; border: 1px solid #e2e8f0; border-radius: 16px; background-color: #ffffff;">
@@ -90,34 +132,16 @@ const sendInvoiceEmail = async (toEmail, invoiceDetails, name) => {
     </div>
   `;
 
-  if (!smtpUser || !smtpPass) {
-    console.log(`[DEV MODE] Invoice email for ${toEmail}:`, invoiceDetails);
-    return { devMode: true, success: true };
-  }
-
-  try {
-    const transporter = getTransporter();
-
-    await transporter.sendMail({
-      from: process.env.SMTP_FROM || `"InternConnect" <${smtpUser}>`,
-      to: toEmail,
-      subject,
-      html: htmlContent
-    });
-
-    console.log(`Invoice email successfully sent to ${toEmail}`);
-    return { devMode: false, success: true };
-  } catch (error) {
-    console.error('SMTP Mailer Error sending invoice, falling back to log:', error.message);
-    console.log(`[DEV MODE] Invoice email for ${toEmail}:`, invoiceDetails);
-    return { devMode: true, success: true };
-  }
+  return sendBrevoEmail({
+    toEmail,
+    toName: name,
+    subject,
+    htmlContent,
+    devFallbackText: `Invoice email for ${toEmail}: ${JSON.stringify(invoiceDetails)}`
+  });
 };
 
 const sendOtpEmail = async (toEmail, otp, purpose) => {
-  const smtpUser = process.env.SMTP_USER;
-  const smtpPass = process.env.SMTP_PASS;
-
   const purposeLabels = {
     resume_payment: 'Resume Builder Payment Verification',
     language_change_fr: 'French Language Activation',
@@ -139,28 +163,12 @@ const sendOtpEmail = async (toEmail, otp, purpose) => {
     </div>
   `;
 
-  if (!smtpUser || !smtpPass) {
-    console.log(`[DEV MODE] OTP for ${toEmail} (${purpose}): ${otp}`);
-    return { devMode: true, success: true };
-  }
-
-  try {
-    const transporter = getTransporter();
-
-    await transporter.sendMail({
-      from: process.env.SMTP_FROM || `"InternConnect" <${smtpUser}>`,
-      to: toEmail,
-      subject,
-      html: htmlContent
-    });
-
-    console.log(`OTP email successfully sent to ${toEmail} for ${purpose}`);
-    return { devMode: false, success: true };
-  } catch (error) {
-    console.error('SMTP Mailer Error sending OTP, falling back to log:', error.message);
-    console.log(`[DEV MODE] OTP for ${toEmail} (${purpose}): ${otp}`);
-    return { devMode: true, success: true };
-  }
+  return sendBrevoEmail({
+    toEmail,
+    subject,
+    htmlContent,
+    devFallbackText: `OTP for ${toEmail} (${purpose}): ${otp}`
+  });
 };
 
 module.exports = { sendPasswordResetEmail, sendInvoiceEmail, sendOtpEmail };
