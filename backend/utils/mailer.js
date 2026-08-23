@@ -1,24 +1,28 @@
+const nodemailer = require('nodemailer');
+
+const getTransporter = () => {
+  return nodemailer.createTransport({
+    host: process.env.SMTP_HOST || 'smtp.gmail.com',
+    port: Number(process.env.SMTP_PORT) || 465,
+    secure: true,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS
+    }
+  });
+};
+
 const sendPasswordResetEmail = async (toEmail, newPassword) => {
-  const smtpHost = process.env.SMTP_HOST;
   const smtpUser = process.env.SMTP_USER;
   const smtpPass = process.env.SMTP_PASS;
 
-  if (!smtpHost || !smtpUser || !smtpPass) {
+  if (!smtpUser || !smtpPass) {
     console.log(`[DEV MODE] Password reset for ${toEmail}: ${newPassword}`);
     return { devMode: true, success: true };
   }
 
   try {
-    const nodemailer = require('nodemailer');
-    const transporter = nodemailer.createTransport({
-      host: smtpHost,
-      port: process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT) : 587,
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: {
-        user: smtpUser,
-        pass: smtpPass
-      }
-    });
+    const transporter = getTransporter();
 
     await transporter.sendMail({
       from: process.env.SMTP_FROM || `"InternConnect" <${smtpUser}>`,
@@ -44,7 +48,6 @@ const sendPasswordResetEmail = async (toEmail, newPassword) => {
 };
 
 const sendInvoiceEmail = async (toEmail, invoiceDetails, name) => {
-  const smtpHost = process.env.SMTP_HOST;
   const smtpUser = process.env.SMTP_USER;
   const smtpPass = process.env.SMTP_PASS;
 
@@ -86,22 +89,13 @@ const sendInvoiceEmail = async (toEmail, invoiceDetails, name) => {
     </div>
   `;
 
-  if (!smtpHost || !smtpUser || !smtpPass) {
+  if (!smtpUser || !smtpPass) {
     console.log(`[DEV MODE] Invoice email for ${toEmail}:`, invoiceDetails);
     return { devMode: true, success: true };
   }
 
   try {
-    const nodemailer = require('nodemailer');
-    const transporter = nodemailer.createTransport({
-      host: smtpHost,
-      port: process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT) : 587,
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: {
-        user: smtpUser,
-        pass: smtpPass
-      }
-    });
+    const transporter = getTransporter();
 
     await transporter.sendMail({
       from: process.env.SMTP_FROM || `"InternConnect" <${smtpUser}>`,
@@ -120,7 +114,6 @@ const sendInvoiceEmail = async (toEmail, invoiceDetails, name) => {
 };
 
 const sendOtpEmail = async (toEmail, otp, purpose) => {
-  const smtpHost = process.env.SMTP_HOST;
   const smtpUser = process.env.SMTP_USER;
   const smtpPass = process.env.SMTP_PASS;
 
@@ -145,22 +138,13 @@ const sendOtpEmail = async (toEmail, otp, purpose) => {
     </div>
   `;
 
-  if (!smtpHost || !smtpUser || !smtpPass) {
+  if (!smtpUser || !smtpPass) {
     console.log(`[DEV MODE] OTP for ${toEmail} (${purpose}): ${otp}`);
     return { devMode: true, success: true };
   }
 
   try {
-    const nodemailer = require('nodemailer');
-    const transporter = nodemailer.createTransport({
-      host: smtpHost,
-      port: process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT) : 587,
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: {
-        user: smtpUser,
-        pass: smtpPass
-      }
-    });
+    const transporter = getTransporter();
 
     await transporter.sendMail({
       from: process.env.SMTP_FROM || `"InternConnect" <${smtpUser}>`,
