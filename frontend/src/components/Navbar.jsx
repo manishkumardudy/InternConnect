@@ -209,6 +209,16 @@ const Navbar = () => {
               {t('nav.browse')}
             </Link>
 
+            <Link
+              to="/portal"
+              className={`flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                isActive('/portal') ? 'nav-link-active' : 'nav-link'
+              }`}
+            >
+              <Sparkles className="h-4 w-4 text-indigo-500" />
+              Portal
+            </Link>
+
             {user && (
               <Link
                 to="/public-space"
@@ -518,6 +528,14 @@ const Navbar = () => {
             onClick={() => setMobileMenuOpen(false)}
           >
             {t('nav.browse')}
+          </Link>
+
+          <Link
+            to="/portal"
+            className="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-indigo-600"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Portal (Discovery Hub)
           </Link>
 
           {user && (

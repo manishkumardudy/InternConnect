@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
 import MobileAccessBlocker from './components/MobileAccessBlocker';
+import InternConnectPortal from './components/InternConnectPortal';
 
 // Pages
 import LandingPage from './pages/LandingPage';
@@ -42,6 +43,7 @@ function App() {
                   {/* Public Routes */}
                   <Route path="/" element={<LandingPage />} />
                   <Route path="/browse" element={<BrowseListings />} />
+                  <Route path="/portal" element={<InternConnectPortal />} />
                   <Route path="/listings/:id" element={<ListingDetail />} />
                   <Route path="/help" element={<Help />} />
                   <Route path="/login" element={<AuthPage />} />
