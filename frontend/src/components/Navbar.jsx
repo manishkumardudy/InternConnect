@@ -174,6 +174,11 @@ const Navbar = () => {
     toggleTheme();
   };
 
+  // Retain only the single floating glassmorphic navbar on student dashboard
+  if (location.pathname === '/student-dashboard') {
+    return null;
+  }
+
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md transition-colors duration-300">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
