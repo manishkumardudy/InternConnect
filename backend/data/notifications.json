@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "6a5fbb266c4b601c48631197",
+    "userId": "6a5fb6194e87716b949a0c08",
+    "type": "new_application",
+    "message": "Priya Patel applied for your posting: \"Ethical Hacker Intern\"",
+    "relatedId": "6a5fbb261d20209094bdd053",
+    "read": false,
+    "createdAt": "2026-07-21T18:32:06.876Z",
+    "updatedAt": "2026-08-01T07:30:37.186Z",
+    "listingId": "6a5fb61a4537895bf1c7ae0e",
+    "applicantUserId": "6a5fb61a78213e47327c2188"
+  },
+  {
+    "_id": "6a5fbb37fb585ff3299c9d62",
+    "userId": "6a5fb6194e87716b949a0c08",
+    "type": "new_application",
+    "message": "Priya Patel applied for your posting: \"Software Development Intern - Full Time\"",
+    "relatedId": "6a5fbb3786cc273d6c93c15b",
+    "read": true,
+    "createdAt": "2026-07-21T18:32:23.997Z",
+    "updatedAt": "2026-08-01T07:30:37.209Z",
+    "listingId": "6a5fb61a88ac11c8af5989f5",
+    "applicantUserId": "6a5fb61a78213e47327c2188"
+  }
+]

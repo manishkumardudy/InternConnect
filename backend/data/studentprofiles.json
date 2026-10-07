@@ -1,0 +1,152 @@
+[
+  {
+    "_id": "6a5fb61ab3ea609653931126",
+    "userId": "6a5fb61a78213e47327c2188",
+    "college": "National Institute of Technology (NIT)",
+    "degree": "Bachelor of Technology (B.Tech) - CSE",
+    "graduationYear": 2027,
+    "skills": [
+      "React",
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Node.js",
+      "Python",
+      "Figma"
+    ],
+    "location": "Bangalore",
+    "bio": "Enthusiastic final-year engineering student passionate about building scalable web applications and UI interfaces.",
+    "resumeUrl": "http://localhost:5000/uploads/sample-resume.pdf",
+    "savedListings": [],
+    "createdAt": "2026-07-21T18:10:34.071Z",
+    "updatedAt": "2026-07-21T18:10:34.071Z"
+  },
+  {
+    "_id": "6a5fb67fdfa5ba01b005defd",
+    "userId": "6a5fb67f8f25d08746fbb9fa",
+    "college": "Verification Institute of Technology",
+    "degree": "Master of Verification (M.Ver)",
+    "graduationYear": 2028,
+    "skills": [
+      "Testing",
+      "Debugging",
+      "Automated Verification"
+    ],
+    "location": "Localhost",
+    "bio": "Automated test runner profile.",
+    "createdAt": "2026-07-21T18:12:15.702Z",
+    "updatedAt": "2026-07-21T18:12:15.702Z"
+  },
+  {
+    "_id": "6a5fb69f2e3a9d96915cd743",
+    "userId": "6a5fb69f3c48f9d0e42caabb",
+    "college": "Verification Institute of Technology",
+    "degree": "Master of Verification (M.Ver)",
+    "graduationYear": 2028,
+    "skills": [
+      "Testing",
+      "Debugging",
+      "Automated Verification"
+    ],
+    "location": "Localhost",
+    "bio": "Automated test runner profile.",
+    "createdAt": "2026-07-21T18:12:47.522Z",
+    "updatedAt": "2026-07-21T18:12:47.522Z"
+  },
+  {
+    "_id": "6a5fb976c8fbbdf9a0ceb57d",
+    "userId": "6a5fb9759e2c5770d9be9343",
+    "college": "Verification Institute of Technology",
+    "degree": "Master of Verification (M.Ver)",
+    "graduationYear": 2028,
+    "skills": [
+      "Testing",
+      "Debugging",
+      "Automated Verification"
+    ],
+    "location": "Localhost",
+    "bio": "Automated test runner profile.",
+    "createdAt": "2026-07-21T18:24:54.113Z",
+    "updatedAt": "2026-07-21T18:24:54.113Z"
+  },
+  {
+    "_id": "6a608ad52b717ca10a2fe825",
+    "userId": "6a608ad036cdeda2d7e50555",
+    "college": "Verification Institute of Technology",
+    "degree": "Master of Verification (M.Ver)",
+    "graduationYear": 2028,
+    "skills": [
+      "Testing",
+      "Debugging",
+      "Automated Verification"
+    ],
+    "location": "Localhost",
+    "bio": "Automated test runner profile.",
+    "createdAt": "2026-07-22T09:18:13.639Z",
+    "updatedAt": "2026-07-22T09:18:13.639Z"
+  },
+  {
+    "_id": "6a60933eb6a5f61436c7fdb6",
+    "userId": "6a60933ea369a76745aece4c",
+    "college": "Verification Institute of Technology",
+    "degree": "Master of Verification (M.Ver)",
+    "graduationYear": 2028,
+    "skills": [
+      "Testing",
+      "Debugging",
+      "Automated Verification"
+    ],
+    "location": "Localhost",
+    "bio": "Automated test runner profile.",
+    "createdAt": "2026-07-22T09:54:06.204Z",
+    "updatedAt": "2026-07-22T09:54:06.204Z"
+  },
+  {
+    "_id": "6a60a18f128494fc3e5bfe43",
+    "userId": "6a60a18f2c3378e2de78add2",
+    "college": "Verification Institute of Technology",
+    "degree": "Master of Verification (M.Ver)",
+    "graduationYear": 2028,
+    "skills": [
+      "Testing",
+      "Debugging",
+      "Automated Verification"
+    ],
+    "location": "Localhost",
+    "bio": "Automated test runner profile.",
+    "createdAt": "2026-07-22T10:55:11.622Z",
+    "updatedAt": "2026-07-22T10:55:11.622Z"
+  },
+  {
+    "_id": "6a60af90bb263408f3b79c35",
+    "userId": "6a60af90a7530b0c772b9a4c",
+    "college": "Verification Institute of Technology",
+    "degree": "Master of Verification (M.Ver)",
+    "graduationYear": 2028,
+    "skills": [
+      "Testing",
+      "Debugging",
+      "Automated Verification"
+    ],
+    "location": "Localhost",
+    "bio": "Automated test runner profile.",
+    "createdAt": "2026-07-22T11:54:56.973Z",
+    "updatedAt": "2026-07-22T11:54:56.973Z"
+  },
+  {
+    "_id": "6a60f29fab4cc0a51d9d4b8c",
+    "userId": "6a60f29f00264ca668a513a7",
+    "college": "Verification Institute of Technology",
+    "degree": "Master of Verification (M.Ver)",
+    "graduationYear": 2028,
+    "skills": [
+      "Testing",
+      "Debugging",
+      "Automated Verification"
+    ],
+    "location": "Localhost",
+    "bio": "Automated test runner profile.",
+    "createdAt": "2026-07-22T16:41:03.098Z",
+    "updatedAt": "2026-07-22T16:41:03.098Z"
+  }
+]

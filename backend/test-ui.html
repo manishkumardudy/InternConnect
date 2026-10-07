@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Test UI</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    .card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+    h2 { margin-top: 0; color: #333; text-align: center; }
+    .form-group { margin-bottom: 1rem; }
+    label { display: block; margin-bottom: 0.5rem; color: #666; font-size: 0.9rem; }
+    input { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 1rem; }
+    button { width: 100%; padding: 0.75rem; background-color: #007bff; color: white; border: none; border-radius: 4px; font-size: 1rem; cursor: pointer; transition: background-color 0.2s; }
+    button:hover { background-color: #0056b3; }
+    #message { margin-top: 1rem; padding: 0.75rem; border-radius: 4px; display: none; text-align: center; font-size: 0.9rem; }
+    .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    #otp-section { display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Test Login Flow</h2>
+    
+    <div id="login-section">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="test@example.com">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="password" placeholder="••••••••">
+      </div>
+      <button onclick="handleLogin()">Log In</button>
+    </div>
+
+    <div id="otp-section">
+      <div class="form-group">
+        <label>Verification Code (Check your email)</label>
+        <input type="text" id="otp" placeholder="123456">
+      </div>
+      <button onclick="handleVerify()">Verify OTP</button>
+    </div>
+
+    <div id="message"></div>
+  </div>
+
+  <script>
+    const API_BASE = 'http://localhost:5000/api/auth';
+    let currentTempToken = '';
+
+    function showMessage(text, isError = false) {
+      const msgDiv = document.getElementById('message');
+      msgDiv.textContent = text;
+      msgDiv.style.display = 'block';
+      msgDiv.className = isError ? 'error' : 'success';
+    }
+
+    async function handleLogin() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      showMessage('Sending login request...', false);
+
+      try {
+        const res = await fetch(`${API_BASE}/login`, {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            // Hardcode User-Agent to ensure Chrome logic is triggered
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
+          },
+          body: JSON.stringify({ email, password })
+        });
+        
+        const data = await res.json();
+        
+        if (res.ok && data.otpRequired) {
+          currentTempToken = data.tempLoginToken;
+          document.getElementById('login-section').style.display = 'none';
+          document.getElementById('otp-section').style.display = 'block';
+          showMessage('Success! OTP sent to your email.', false);
+        } else if (!res.ok) {
+          showMessage(data.message || 'Login failed', true);
+        } else {
+          showMessage('Logged in directly (No OTP required)', false);
+        }
+      } catch (err) {
+        showMessage('Error connecting to server. Is it running?', true);
+      }
+    }
+
+    async function handleVerify() {
+      const code = document.getElementById('otp').value;
+      showMessage('Verifying OTP...', false);
+
+      try {
+        const res = await fetch(`${API_BASE}/verify-login-otp`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ tempLoginToken: currentTempToken, code })
+        });
+        
+        const data = await res.json();
+        
+        if (res.ok) {
+          showMessage('✅ ' + data.message, false);
+        } else {
+          showMessage('❌ ' + (data.message || 'Verification failed'), true);
+        }
+      } catch (err) {
+        showMessage('Error connecting to server.', true);
+      }
+    }
+  </script>
+</body>
+</html>

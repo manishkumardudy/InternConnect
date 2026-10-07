@@ -1,0 +1,182 @@
+[
+  {
+    "_id": "6a5fb6194e87716b949a0c08",
+    "email": "recruiter@techcorp.com",
+    "name": "Rahul Sharma",
+    "role": "recruiter",
+    "firebaseUid": "recruiter-default-uid",
+    "password": "password123",
+    "createdAt": "2026-07-21T18:10:33.715Z",
+    "updatedAt": "2026-07-21T18:10:33.715Z"
+  },
+  {
+    "_id": "6a5fb61971d81a9574d056c3",
+    "email": "hiring@designlabs.co",
+    "name": "Aisha Gupta",
+    "role": "recruiter",
+    "firebaseUid": "recruiter-design-uid",
+    "password": "password123",
+    "createdAt": "2026-07-21T18:10:33.882Z",
+    "updatedAt": "2026-07-21T18:10:33.882Z"
+  },
+  {
+    "_id": "6a5fb61a78213e47327c2188",
+    "email": "student@college.edu",
+    "name": "Priya Patel",
+    "role": "student",
+    "firebaseUid": "student-default-uid",
+    "password": "password123",
+    "createdAt": "2026-07-21T18:10:34.060Z",
+    "updatedAt": "2026-07-21T18:10:34.060Z"
+  },
+  {
+    "_id": "6a5fb67f8f25d08746fbb9fa",
+    "email": "verify-student-qeugt@verify.com",
+    "name": "Verify Candidate",
+    "role": "student",
+    "firebaseUid": "mock-uid-1u3yh6fur",
+    "password": "password123",
+    "createdAt": "2026-07-21T18:12:15.213Z",
+    "updatedAt": "2026-07-21T18:12:15.213Z"
+  },
+  {
+    "_id": "6a5fb69f3c48f9d0e42caabb",
+    "email": "verify-student-6ujgp@verify.com",
+    "name": "Verify Candidate",
+    "role": "student",
+    "firebaseUid": "mock-uid-v8vftvinf",
+    "password": "password123",
+    "createdAt": "2026-07-21T18:12:47.404Z",
+    "updatedAt": "2026-07-21T18:12:47.404Z"
+  },
+  {
+    "_id": "6a5fb9759e2c5770d9be9343",
+    "email": "verify-student-gj87v@verify.com",
+    "name": "Verify Candidate",
+    "role": "student",
+    "firebaseUid": "mock-uid-7oi2kgk8s",
+    "password": "password123",
+    "createdAt": "2026-07-21T18:24:53.933Z",
+    "updatedAt": "2026-07-21T18:24:53.933Z"
+  },
+  {
+    "_id": "6a608ad036cdeda2d7e50555",
+    "email": "verify-student-q2nff@verify.com",
+    "name": "Verify Candidate",
+    "role": "student",
+    "firebaseUid": "mock-uid-f45hen0d7",
+    "password": "password123",
+    "createdAt": "2026-07-22T09:18:08.412Z",
+    "updatedAt": "2026-07-22T09:18:08.412Z"
+  },
+  {
+    "_id": "6a60933ea369a76745aece4c",
+    "email": "verify-student-ii2c1@verify.com",
+    "name": "Verify Candidate",
+    "role": "student",
+    "firebaseUid": "mock-uid-imie42izv",
+    "password": "password123",
+    "createdAt": "2026-07-22T09:54:06.101Z",
+    "updatedAt": "2026-07-22T09:54:06.101Z"
+  },
+  {
+    "_id": "6a60a18f2c3378e2de78add2",
+    "email": "verify-student-n0r9y@verify.com",
+    "name": "Verify Candidate",
+    "role": "student",
+    "firebaseUid": "mock-uid-fnhbmtrv4",
+    "password": "password123",
+    "createdAt": "2026-07-22T10:55:11.601Z",
+    "updatedAt": "2026-07-22T10:55:11.601Z"
+  },
+  {
+    "_id": "6a60af90a7530b0c772b9a4c",
+    "email": "verify-student-g1w3t@verify.com",
+    "name": "Verify Candidate",
+    "role": "student",
+    "firebaseUid": "mock-uid-igwehwcm4",
+    "password": "password123",
+    "createdAt": "2026-07-22T11:54:56.928Z",
+    "updatedAt": "2026-07-22T11:54:56.928Z"
+  },
+  {
+    "_id": "6a60f29f00264ca668a513a7",
+    "email": "verify-student-ng60o@verify.com",
+    "name": "Verify Candidate",
+    "role": "student",
+    "firebaseUid": "mock-uid-edlk2wk4y",
+    "password": "password123",
+    "createdAt": "2026-07-22T16:41:03.077Z",
+    "updatedAt": "2026-07-22T16:41:03.077Z"
+  },
+  {
+    "_id": "6a65be1714b3d62b75041354",
+    "email": "manishkumar@gmail.com",
+    "name": "manishkumar",
+    "role": "student",
+    "firebaseUid": "mock-uid-v1yqxuaxt",
+    "password": "1234567",
+    "createdAt": "2026-07-26T07:58:15.853Z",
+    "updatedAt": "2026-07-26T07:58:15.853Z"
+  },
+  {
+    "_id": "6a65c69210baeacac70e143b",
+    "email": "nihen@gmail.com",
+    "name": "nihen",
+    "role": "student",
+    "firebaseUid": "mock-uid-5f3ll9vv2",
+    "password": "1234567",
+    "createdAt": "2026-07-26T08:34:26.815Z",
+    "updatedAt": "2026-07-26T08:34:26.815Z"
+  },
+  {
+    "_id": "6a65c73739de25632013dbac",
+    "email": "king@gmail.com",
+    "name": "king",
+    "role": "student",
+    "firebaseUid": "mock-uid-5j2s6afgl",
+    "password": "1234567",
+    "createdAt": "2026-07-26T08:37:11.445Z",
+    "updatedAt": "2026-07-26T08:37:11.445Z"
+  },
+  {
+    "_id": "6a6651d749060f065e56bb27",
+    "email": "nishant@gmail.com",
+    "name": "nishant",
+    "role": "student",
+    "firebaseUid": "mock-uid-wbn8o7uii",
+    "password": "1234567",
+    "createdAt": "2026-07-26T18:28:39.844Z",
+    "updatedAt": "2026-07-26T18:28:39.844Z"
+  },
+  {
+    "_id": "6a66530a1af2ba8c770a8c0b",
+    "email": "naam@gmail.com",
+    "name": "naam",
+    "role": "student",
+    "firebaseUid": "mock-uid-58ye3cxvi",
+    "password": "1234567",
+    "createdAt": "2026-07-26T18:33:46.175Z",
+    "updatedAt": "2026-07-26T18:33:46.175Z"
+  },
+  {
+    "_id": "6a6655d83292956492656308",
+    "email": "maaa@gmail.com",
+    "name": "naaam",
+    "role": "student",
+    "firebaseUid": "mock-uid-xsrra4u97",
+    "password": "1234567",
+    "createdAt": "2026-07-26T18:45:44.261Z",
+    "updatedAt": "2026-07-26T18:45:44.261Z"
+  },
+  {
+    "_id": "6a6656dfef1ac4cd68080220",
+    "email": "wwww@gmail.com",
+    "name": "wwww",
+    "role": "student",
+    "firebaseUid": "mock-uid-dvy4nyt13",
+    "password": "1234567",
+    "createdAt": "2026-07-26T18:50:07.747Z",
+    "updatedAt": "2026-07-26T18:50:07.747Z"
+  }
+]

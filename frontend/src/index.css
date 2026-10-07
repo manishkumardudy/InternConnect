@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Base: poori site ka default look (white / light) ---------- */
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-800 antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Input focus par primary color ki ring */
+  input:focus,
+  select:focus,
+  textarea:focus {
+    @apply outline-none ring-2 ring-primary/30 border-primary;
+  }
+}
+
+/* ---------- Legacy: purane pages abhi ye classes use karte hain ----------
+   Jab hum un pages ko redesign kar lenge, tab ye section delete kar denge. */
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
+}
+.btn-animate {
+  @apply transition-all duration-200 hover:shadow-md active:scale-[0.98];
+}
+.fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Payment success modal ke animations (Subscription page) */
+@keyframes successPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes ringExpand {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+@keyframes slideUpFade {
+  0% {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-success-pop {
+  animation: successPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.animate-ring-expand {
+  animation: ringExpand 1.2s ease-out infinite;
+}
+.animate-slide-up-fade {
+  animation: slideUpFade 0.5s ease-out 0.2s forwards;
+  opacity: 0;
+}
