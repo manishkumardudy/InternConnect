@@ -1,7 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Briefcase, Github, Linkedin, Mail, Heart, Sparkles, MapPin, Building2 } from 'lucide-react';
+import { Briefcase, Github, Linkedin, Mail } from 'lucide-react';
 import elevanceLogo from '../assets/elevanceskills_logo.png';
 
 const Footer = () => {

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Briefcase, CheckCircle, Clock, Bookmark, Search, Filter,
-  MapPin, DollarSign, Calendar, ChevronDown, Award, Sparkles, RefreshCw, User
+  MapPin, DollarSign, Calendar, ChevronDown, Sparkles, RefreshCw
 } from 'lucide-react';
 
 export default function StudentDashboardLive({
@@ -17,7 +18,6 @@ export default function StudentDashboardLive({
   const [selectedType, setSelectedType] = useState('All');
   const [minStipend, setMinStipend] = useState(0);
   const [workFromHome, setWorkFromHome] = useState(false);
-  const [activeTab, setActiveTab] = useState('Candidate Dashboard');
 
   const stats = [
     {
@@ -110,71 +110,26 @@ export default function StudentDashboardLive({
 
   return (
     <div className="min-h-screen bg-[#F8F9FC] text-slate-800 font-sans">
+      {/* MAIN */}
+      <main className="max-w-[1440px] mx-auto px-6 py-6 space-y-6">
 
-      {/* HEADER */}
-      <header className="sticky top-0 z-50 bg-white border-b border-slate-100 px-6 py-4 flex items-center justify-between shadow-sm">
-        <div className="flex items-center gap-8">
-          <div className="flex items-center gap-2">
-            <div className="bg-indigo-600 text-white p-2 rounded-xl font-bold flex items-center justify-center h-10 w-10 text-lg shadow-md shadow-indigo-100">
-              IC
-            </div>
-            <span className="text-xl font-extrabold text-indigo-900 tracking-tight">InternConnect</span>
-          </div>
-
-          <nav className="hidden lg:flex items-center gap-6">
-            {['Browse Opportunities', 'Public Space', 'Candidate Dashboard', 'My Applications'].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => {
-                  setActiveTab(tab);
-                  if (tab === 'Browse Opportunities') onExplore();
-                  if (tab === 'My Applications') onAction('view-applications');
-                }}
-                className={`text-sm font-semibold transition-all px-1 py-2 relative ${
-                  activeTab === tab ? 'text-indigo-600' : 'text-slate-500 hover:text-indigo-500'
-                }`}
-              >
-                {tab}
-                {activeTab === tab && (
-                  <span className="absolute bottom-0 left-0 w-full h-[3px] bg-indigo-600 rounded-full" />
-                )}
-              </button>
-            ))}
-          </nav>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => onAction('resume-builder')}
-            className="hidden md:flex items-center gap-2 border border-slate-200 hover:bg-slate-50 px-4 py-2 rounded-xl text-sm font-medium transition text-slate-600"
+        {/* TOP ACTION BAR */}
+        <div className="flex flex-wrap items-center justify-end gap-3">
+          <Link
+            to="/resume-builder"
+            className="flex items-center gap-2 border border-slate-200 bg-white hover:bg-slate-50 px-4 py-2 rounded-xl text-sm font-medium transition text-slate-600 shadow-sm"
           >
             <span>📝 Resume Builder</span>
             <span className="text-[10px] bg-indigo-50 text-indigo-600 px-1.5 py-0.5 rounded-md font-bold uppercase tracking-wider">Pro</span>
-          </button>
+          </Link>
 
-          <button
-            onClick={onExplore}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition-all shadow-lg shadow-indigo-100 flex items-center gap-2"
+          <Link
+            to="/browse"
+            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition-all shadow-md shadow-indigo-100 flex items-center gap-2"
           >
             Explore Roles →
-          </button>
-
-          <div className="h-6 w-px bg-slate-200 hidden md:block"></div>
-
-          <button
-            onClick={() => onAction('complete-profile')}
-            className="flex items-center gap-2 cursor-pointer hover:bg-slate-50 p-1.5 rounded-xl transition"
-          >
-            <div className="bg-blue-100 text-blue-700 w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm">
-              {userName.charAt(0).toUpperCase()}
-            </div>
-            <span className="text-sm font-bold text-slate-700 hidden sm:inline">{userName}</span>
-          </button>
+          </Link>
         </div>
-      </header>
-
-      {/* MAIN */}
-      <main className="max-w-[1440px] mx-auto px-6 py-6 space-y-8">
 
         {/* HERO BANNER */}
         <section className="relative overflow-hidden bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 border border-indigo-100/50 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
@@ -461,12 +416,6 @@ export default function StudentDashboardLive({
         </section>
 
       </main>
-
-      {/* FOOTER */}
-      <footer className="border-t border-slate-200 mt-20 bg-white py-6 text-center text-xs font-bold text-slate-400">
-        &copy; 2026 InternConnect. All rights reserved. Built with premium light standards.
-      </footer>
-
     </div>
   );
 }

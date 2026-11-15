@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { LogOut } from 'lucide-react';
@@ -24,7 +24,7 @@ export default function ProfileMenu() {
 
   return (
     <div ref={ref} className="relative">
-      {/* Button: naam ka pehla akshar + pehla naam */}
+      {/* User initials and first name avatar button */}
       <button
         onClick={() => setOpen(!open)}
         className="flex items-center gap-2 rounded-md px-2 py-1 hover:bg-gray-100"

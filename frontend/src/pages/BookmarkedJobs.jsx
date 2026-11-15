@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import api, { getMediaUrl } from '../services/api';
 import { ListingCardSkeleton } from '../components/SkeletonLoader';
 import {
-  Bookmark, Building2, MapPin, DollarSign, Calendar, AlertCircle,
-  ArrowRight, Trash2, ArrowLeft, Briefcase, ExternalLink, Sparkles, Tag
+  Bookmark, Building2, MapPin, DollarSign,
+  ArrowRight, Trash2, ArrowLeft, Sparkles
 } from 'lucide-react';
 
 const BookmarkedJobs = () => {

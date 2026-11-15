@@ -7,9 +7,9 @@ async function getAcceptedFriendCount(userId) {
     const allAccepted = await models.Friend.find({ status: 'accepted' });
     const userStr = String(userId);
     return allAccepted.filter(f => {
-      const reqId = String(f.requesterId._id || f.requesterId);
-      const recId = String(f.recipientId._id || f.recipientId);
-      return reqId === userStr || recId === userStr;
+      const reqId = String(f.requesterId?._id || f.requesterId || '');
+      const recId = String(f.recipientId?._id || f.recipientId || '');
+      return (reqId && reqId === userStr) || (recId && recId === userStr);
     }).length;
   } catch (error) {
     console.error('Error calculating friend count:', error);
@@ -40,8 +40,8 @@ const sendRequest = async (req, res) => {
     // Check existing request/friendship in either direction
     const existing = await models.Friend.find({});
     const existingRelation = existing.find(f => {
-      const reqId = String(f.requesterId._id || f.requesterId);
-      const recId = String(f.recipientId._id || f.recipientId);
+      const reqId = String(f.requesterId?._id || f.requesterId || '');
+      const recId = String(f.recipientId?._id || f.recipientId || '');
       const cStr = String(currentUserId);
       const rStr = String(recipientId);
       return (reqId === cStr && recId === rStr) || (reqId === rStr && recId === cStr);
@@ -151,8 +151,8 @@ const unfriend = async (req, res) => {
 
     const allRelations = await models.Friend.find({});
     const target = allRelations.find(f => {
-      const reqId = String(f.requesterId._id || f.requesterId);
-      const recId = String(f.recipientId._id || f.recipientId);
+      const reqId = String(f.requesterId?._id || f.requesterId || '');
+      const recId = String(f.recipientId?._id || f.recipientId || '');
       const fStr = String(friendUserId);
       return (reqId === currentUserId && recId === fStr) || (reqId === fStr && recId === currentUserId);
     });
@@ -177,15 +177,16 @@ const getFriends = async (req, res) => {
 
     const friends = [];
     for (const f of allAccepted) {
-      const reqId = String(f.requesterId._id || f.requesterId);
-      const recId = String(f.recipientId._id || f.recipientId);
+      const reqId = String(f.requesterId?._id || f.requesterId || '');
+      const recId = String(f.recipientId?._id || f.recipientId || '');
 
-      if (reqId === currentUserId || recId === currentUserId) {
+      if ((reqId && reqId === currentUserId) || (recId && recId === currentUserId)) {
         const friendUserObj = reqId === currentUserId ? f.recipientId : f.requesterId;
         const targetId = reqId === currentUserId ? recId : reqId;
+        if (!targetId) continue;
 
         // Ensure user obj is populated
-        let userDetail = typeof friendUserObj === 'object' && friendUserObj.name ? friendUserObj : await models.User.findById(targetId);
+        let userDetail = typeof friendUserObj === 'object' && friendUserObj?.name ? friendUserObj : await models.User.findById(targetId);
 
         if (userDetail) {
           friends.push({
@@ -264,8 +265,8 @@ const getUsers = async (req, res) => {
     const result = candidateUsers.map(u => {
       const targetId = String(u._id);
       const rel = allRelations.find(f => {
-        const reqId = String(f.requesterId._id || f.requesterId);
-        const recId = String(f.recipientId._id || f.recipientId);
+        const reqId = String(f.requesterId?._id || f.requesterId || '');
+        const recId = String(f.recipientId?._id || f.recipientId || '');
         return (reqId === currentUserId && recId === targetId) || (reqId === targetId && recId === currentUserId);
       });
 
@@ -273,7 +274,7 @@ const getUsers = async (req, res) => {
       let requestId = null;
       if (rel) {
         requestId = rel._id;
-        const reqId = String(rel.requesterId._id || rel.requesterId);
+        const reqId = String(rel.requesterId?._id || rel.requesterId || '');
         if (rel.status === 'accepted') {
           status = 'accepted';
         } else if (rel.status === 'pending') {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import api, { getMediaUrl } from '../services/api';
@@ -6,7 +6,7 @@ import AutocompleteInput from '../components/AutocompleteInput';
 import ExploreOpportunities from '../components/ExploreOpportunities';
 import DeveloperCredit from '../components/DeveloperCredit';
 import { ListingCardSkeleton } from '../components/SkeletonLoader';
-import { Search, MapPin, DollarSign, Calendar, ArrowRight, Star, Code, PenTool, BarChart, Settings, Compass, Sparkles, Building2 } from 'lucide-react';
+import { Search, MapPin, DollarSign, Calendar, ArrowRight, Star, Code, PenTool, BarChart, Compass, Sparkles, Building2 } from 'lucide-react';
 
 const LandingPage = () => {
   const { t } = useTranslation();

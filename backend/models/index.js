@@ -1,7 +1,6 @@
-const db = require('../config/db');
-
-// Export Mongoose models if MongoDB is active, else fall back to local JSON adapter
-const mongoModels = {
+// Central export for Mongoose models
+// Usage: const { User, Listing } = require('../models');
+module.exports = {
   User: require('./User'),
   StudentProfile: require('./StudentProfile'),
   Company: require('./Company'),
@@ -14,17 +13,4 @@ const mongoModels = {
   Otp: require('./Otp'),
   GeneratedResume: require('./GeneratedResume'),
   LoginHistory: require('./LoginHistory'),
-  isMockDb: false
 };
-
-const localDbModels = require('../config/localDb');
-
-// Proxy object to dynamically delegate to Mongoose models or local JSON adapter
-module.exports = new Proxy(mongoModels, {
-  get(target, prop) {
-    if (db.isMock()) {
-      return localDbModels[prop];
-    }
-    return target[prop];
-  }
-});

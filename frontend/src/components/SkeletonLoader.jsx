@@ -1,4 +1,3 @@
-import React from 'react';
 
 export const ListingCardSkeleton = ({ count = 6 }) => {
   return (

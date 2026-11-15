@@ -1,6 +1,5 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Mail, ExternalLink, Code2, Award, Sparkles, Github, Linkedin } from 'lucide-react';
+import { Mail, ExternalLink, Code2, Award, Github, Linkedin } from 'lucide-react';
 import elevanceLogo from '../assets/elevanceskills_logo.png';
 
 const DeveloperCredit = () => {

@@ -513,7 +513,13 @@
     "noUsersFound": "未找到相关用户。",
     "friendsBadge": "好友",
     "pendingBadge": "等待回应",
-    "addFriendBtn": "加好友"
+    "addFriendBtn": "加好友",
+    "deletedUser": "已注销用户",
+    "mediaUnavailable": "媒体无法显示",
+    "yourFriends": "我的好友",
+    "addFriendsToUnlock": "添加好友以解锁发帖",
+    "dailyPostLimit": "每日发帖上限",
+    "postsLeftTodayChip": "今日还剩 {{count}} 篇"
   },
   "applicantTracker": {
     "backToDashboard": "返回工作台",
@@ -691,7 +697,9 @@
     "chromeSecurityNotice": "已向您的注册邮箱发送了 6 位 OTP 验证码，以完成 Chrome 浏览器登录二次验证。",
     "enterOtpLabel": "输入 6 位 OTP 验证码",
     "verifyOtpBtn": "验证 OTP 并登录",
-    "verifying": "验证中..."
+    "verifying": "验证中...",
+    "showPassword": "显示密码",
+    "hidePassword": "隐藏密码"
   },
   "loginRegister": {
     "fillAllFields": "请填写所有必填项。",

@@ -4,7 +4,6 @@ dns.setDefaultResultOrder('ipv4first');
 const mongoose = require('mongoose');
 
 let isConnected = false;
-let useMock = true;
 
 async function connectDB() {
   const mongoUri = process.env.MONGODB_URI;
@@ -27,7 +26,6 @@ async function connectDB() {
         serverSelectionTimeoutMS: 20000
       });
       isConnected = true;
-      useMock = false;
       console.log(`[BOOT] PID: ${process.pid} | DB Mode: ATLAS — MongoDB Atlas Connected Successfully.`);
       return;
     } catch (err) {
@@ -49,5 +47,4 @@ async function connectDB() {
 module.exports = {
   connectDB,
   isConnected: () => isConnected,
-  isMock: () => useMock
 };

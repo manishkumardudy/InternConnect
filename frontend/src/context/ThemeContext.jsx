@@ -1,8 +1,6 @@
-import React, { createContext, useContext, useEffect } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 
-// Abhi poori site sirf LIGHT (white) theme me chalegi.
-// Purane pages 'useTheme' use karte hain, isliye ye file rakhi hai taaki wo crash na ho.
-// Aage kabhi dark mode chahiye to yahin se wapas laayenge.
+// Light theme provider maintains consistent white/light design and backward compatibility
 const ThemeContext = createContext({
   theme: 'light',
   toggleTheme: () => {}
@@ -10,13 +8,13 @@ const ThemeContext = createContext({
 
 export const ThemeProvider = ({ children }) => {
   useEffect(() => {
-    // Pehle kabhi dark save hua tha to use hata do
+    // Clear any stored dark mode settings
     document.documentElement.classList.remove('dark');
     try {
       localStorage.removeItem('theme');
       localStorage.removeItem('internconnect_theme');
     } catch (e) {
-      // localStorage block ho to koi dikkat nahi
+      // Ignore localStorage errors in restricted environments
     }
   }, []);
 

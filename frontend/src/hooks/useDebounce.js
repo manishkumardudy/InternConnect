@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
-// value ko 'delay' ms ruk kar return karta hai.
-// Search box me har akshar par API call na ho, isliye use karte hain.
+// Returns debounced value after specified delay ms
 export default function useDebounce(value, delay = 500) {
   const [debounced, setDebounced] = useState(value);
 

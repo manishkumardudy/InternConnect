@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AlertCircle, Search, SlidersHorizontal } from 'lucide-react';
@@ -13,9 +13,7 @@ export default function BrowseListings() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // ---------- 1. Filters: sab kuch URL se aata hai ----------
-  // Example URL: /browse?type=job&workMode=remote&page=2
-  // URL hi "single source of truth" hai, isliye page refresh/share karne par bhi filters bache rehte hain.
+  // 1. Filters derived from URL query parameters
   const filters = {
     q: searchParams.get('q') || '',
     type: searchParams.get('type') || '',
@@ -27,11 +25,11 @@ export default function BrowseListings() {
     page: Number(searchParams.get('page')) || 1,
   };
 
-  // Filter badalna: purane params me naye changes mila do, aur page 1 par wapas aa jao
+  // Update filters and reset to page 1
   const updateFilters = (changes) => {
     const next = { ...Object.fromEntries(searchParams), ...changes, page: '1' };
     Object.keys(next).forEach((key) => {
-      if (!next[key]) delete next[key]; // khali values URL se hata do
+      if (!next[key]) delete next[key]; // remove empty parameters
     });
     setSearchParams(next);
   };
@@ -43,17 +41,17 @@ export default function BrowseListings() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // ---------- 2. Backend se listings laana ----------
+  // 2. Fetch listings from backend
   const [listings, setListings] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const queryString = searchParams.toString(); // URL badle to dobara fetch ho
+  const queryString = searchParams.toString();
 
   useEffect(() => {
-    let cancelled = false; // purana request late aaye to uska result ignore karo
+    let cancelled = false; // ignore stale responses
     setLoading(true);
     setError('');
 
@@ -78,7 +76,7 @@ export default function BrowseListings() {
     };
   }, [queryString]);
 
-  // ---------- 3. Student ke saved aur applied listings ----------
+  // 3. Student saved and applied listings
   const [savedIds, setSavedIds] = useState([]);
   const [appliedIds, setAppliedIds] = useState([]);
   const isStudent = user?.role === 'student';
@@ -92,11 +90,11 @@ export default function BrowseListings() {
         const applied = appsRes.data.applications || [];
         setAppliedIds(applied.map((app) => String(app.listingId._id || app.listingId)));
       })
-      .catch((err) => console.error('Student data load nahi hua:', err));
+      .catch((err) => console.error('Failed to load student data:', err));
   }, [isStudent]);
 
   const handleToggleSave = async (e, listingId) => {
-    e.stopPropagation(); // card ka click (details page) na chale
+    e.stopPropagation(); // prevent card click navigation
     if (!user) return navigate('/login');
     if (!isStudent) return;
 
@@ -105,11 +103,11 @@ export default function BrowseListings() {
       const id = String(listingId);
       setSavedIds((prev) => (res.data.saved ? [...prev, id] : prev.filter((x) => x !== id)));
     } catch (err) {
-      console.error('Save nahi hua:', err);
+      console.error('Failed to toggle save:', err);
     }
   };
 
-  // ---------- 4. Top search box ----------
+  // 4. Search input state
   const [keyword, setKeyword] = useState(filters.q);
   useEffect(() => setKeyword(filters.q), [filters.q]);
 
@@ -118,7 +116,7 @@ export default function BrowseListings() {
     updateFilters({ q: keyword.trim() });
   };
 
-  // Mobile par filters ko chhupa/dikha sakte hain
+  // Mobile filter visibility state
   const [showFilters, setShowFilters] = useState(false);
 
   const heading =

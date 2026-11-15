@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link, useSearchParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import api, { getMediaUrl } from '../services/api';
-import { ChevronLeft, FileText, CheckCircle2, XCircle, Award, User, Download, Mail, School, MapPin, Check, X } from 'lucide-react';
+import { ChevronLeft, Award, Download, Mail, School, MapPin, X } from 'lucide-react';
 
 // Calculate skill match percentage between candidate profile and job requirements
 const calculateMatchPercentage = (candidateSkills = [], jobSkills = []) => {

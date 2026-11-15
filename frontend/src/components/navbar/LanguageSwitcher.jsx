@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Languages, X } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
@@ -20,26 +20,26 @@ export default function LanguageSwitcher() {
   const { i18n } = useTranslation();
   const { user } = useAuth();
   const [open, setOpen] = useState(false);
-  const [otp, setOtp] = useState(EMPTY_OTP); // French ke liye OTP popup ki state
+  const [otp, setOtp] = useState(EMPTY_OTP); // OTP modal state for French language selection
 
   const ref = useRef(null);
   useClickOutside(ref, () => setOpen(false));
 
-  // Language save karna (sirf tab jab user login ho)
+  // Persist language selection when authenticated
   const saveLanguage = async (code) => {
     i18n.changeLanguage(code);
     if (!user) return;
     try {
       await api.patch('/auth/update-language', { language: code });
     } catch (e) {
-      console.error('Language save nahi hui:', e);
+      console.error('Failed to save language preference:', e);
     }
   };
 
   const handleSelect = async (code) => {
     setOpen(false);
 
-    // Rule: French ke liye pehle email OTP verify karna padta hai
+    // Rule: French requires email OTP verification first
     if (code === 'fr') {
       setOtp({ ...EMPTY_OTP, open: true });
       try {
@@ -48,13 +48,13 @@ export default function LanguageSwitcher() {
         setOtp({
           ...EMPTY_OTP,
           open: true,
-          error: err.response?.data?.message || 'OTP bhejne me dikkat aayi.',
+          error: err.response?.data?.message || 'Failed to send OTP.',
         });
       }
       return;
     }
 
-    // Baaki languages seedha badal jaati hain
+    // Change language immediately for other languages
     saveLanguage(code);
   };
 

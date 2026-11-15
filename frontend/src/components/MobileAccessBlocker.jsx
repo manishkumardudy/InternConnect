@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Smartphone, Clock, ShieldAlert, Monitor, RotateCcw } from 'lucide-react';
 
 const isMobileDevice = () => {

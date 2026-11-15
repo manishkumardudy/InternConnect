@@ -1,7 +1,5 @@
-// Navbar ke saare links yahin ek jagah define hain.
-// Naya link jodna ho to bas yahan ek line add karo.
-
-// Upar ki main bar me dikhne wale links
+// Navbar navigation links definitions
+// Main header navigation links
 export function getMainLinks(user, t) {
   const links = [{ to: '/browse', label: t('nav.browse') }];
 
@@ -23,7 +21,7 @@ export function getMainLinks(user, t) {
   return links;
 }
 
-// Profile dropdown (aur mobile menu) me dikhne wale links
+// Profile dropdown and mobile menu navigation links
 export function getMenuLinks(user, t) {
   const links = [];
 

@@ -6,8 +6,11 @@ const createPost = async (req, res) => {
   try {
     const currentUserId = req.user.userId;
 
-    if (!req.file) {
-      return res.status(400).json({ message: 'Media file (image or video) is required.' });
+    const caption = (req.body.caption || '').trim();
+
+    // Must have either text or a media file
+    if (!caption && !req.file) {
+      return res.status(400).json({ message: 'Post must contain text or a media file.' });
     }
 
     // 1. Friend & Daily Limit Check
@@ -31,18 +34,21 @@ const createPost = async (req, res) => {
       }
     }
 
-    // 2. Media processing
-    const isVideo = req.file.mimetype.startsWith('video/') ||
-      /\.(mp4|webm|mov|avi|mkv)$/i.test(req.file.originalname);
-    const mediaType = isVideo ? 'video' : 'image';
-    const mediaUrl = `/uploads/${req.file.filename}`;
+    // 2. Media processing (optional)
+    let mediaUrl;
+    let mediaType;
+    if (req.file) {
+      const isVideo = req.file.mimetype.startsWith('video/') ||
+        /\.(mp4|webm|mov|avi|mkv)$/i.test(req.file.originalname);
+      mediaType = isVideo ? 'video' : 'image';
+      mediaUrl = `/uploads/${req.file.filename}`;
+    }
 
     // 3. Create post
     const post = await models.Post.create({
       userId: currentUserId,
-      mediaUrl,
-      mediaType,
-      caption: req.body.caption || '',
+      ...(mediaUrl ? { mediaUrl, mediaType } : {}),
+      caption,
       likes: [],
       comments: [],
       shareCount: 0
@@ -298,6 +304,30 @@ const pinComment = async (req, res) => {
   }
 };
 
+// Delete Post (owner only)
+const deletePost = async (req, res) => {
+  try {
+    const currentUserId = String(req.user.userId);
+    const { postId } = req.params;
+
+    const post = await models.Post.findById(postId);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found.' });
+    }
+
+    const ownerId = String(post.userId?._id || post.userId);
+    if (ownerId !== currentUserId) {
+      return res.status(403).json({ message: 'You can only delete your own posts.' });
+    }
+
+    await models.Post.findByIdAndDelete(postId);
+    res.json({ message: 'Post deleted successfully.' });
+  } catch (error) {
+    console.error('Delete post error:', error);
+    res.status(500).json({ message: 'Failed to delete post.' });
+  }
+};
+
 // Share Post
 const sharePost = async (req, res) => {
   try {
@@ -330,5 +360,6 @@ module.exports = {
   addComment,
   deleteComment,
   pinComment,
-  sharePost
+  sharePost,
+  deletePost
 };

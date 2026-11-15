@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import api, { getMediaUrl } from '../services/api';
 import ExploreOpportunities from '../components/ExploreOpportunities';
 import {
-  PlusCircle, Building2, Users, FileText, CheckCircle, BarChart,
-  Eye, Settings, AlertCircle, Edit3, Trash2, X, Tag, Calendar,
-  Loader2, Save, ArrowRight
+  PlusCircle, Building2, Users, FileText, CheckCircle,
+  Edit3, Trash2, X, Tag, Loader2, Save
 } from 'lucide-react';
 
 const CATEGORIES = [

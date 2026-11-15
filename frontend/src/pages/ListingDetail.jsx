@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import api, { getMediaUrl } from '../services/api';
 import { DetailSkeleton } from '../components/SkeletonLoader';
-import { MapPin, DollarSign, Calendar, Users, Bookmark, FileText, CheckCircle2, ChevronLeft, Building2, Globe, AlertTriangle, Briefcase, Award, X } from 'lucide-react';
+import { MapPin, DollarSign, Calendar, Users, Bookmark, FileText, CheckCircle2, ChevronLeft, Building2, Globe, AlertTriangle, X } from 'lucide-react';
 
 const ListingDetail = () => {
   const { t } = useTranslation();

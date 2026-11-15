@@ -13,5 +13,6 @@ router.post('/:postId/comment', postController.addComment);
 router.delete('/:postId/comment/:commentId', postController.deleteComment);
 router.put('/:postId/comment/:commentId/pin', postController.pinComment);
 router.post('/:postId/share', postController.sharePost);
+router.delete('/:postId', postController.deletePost);
 
 module.exports = router;

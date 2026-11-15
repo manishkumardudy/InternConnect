@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import api from '../services/api';
 import AutocompleteInput from '../components/AutocompleteInput';
-import { PlusCircle, Building2, MapPin, DollarSign, Calendar, Sparkles, FileText, ChevronLeft, Tag, X } from 'lucide-react';
+import { PlusCircle, ChevronLeft, Tag, X } from 'lucide-react';
 
 const CATEGORIES = [
   'Engineering & Technology',

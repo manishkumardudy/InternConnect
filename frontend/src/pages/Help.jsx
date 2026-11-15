@@ -1,5 +1,4 @@
-import React, { useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import {
@@ -14,16 +13,10 @@ import {
   Globe,
   HelpCircle,
   X,
-  ExternalLink,
-  CheckCircle2,
-  ArrowRight,
-  ShieldAlert,
   Send,
   PlusCircle,
   Users,
-  Building2,
-  Award,
-  ShieldCheck
+  Building2
 } from 'lucide-react';
 
 const CATEGORIES = [

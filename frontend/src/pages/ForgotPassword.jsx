@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { forgotPasswordApi } from '../services/api';
-import { Mail, ArrowRight, ShieldCheck, CheckCircle2, AlertCircle, ArrowLeft, KeyRound } from 'lucide-react';
+import { Mail, ArrowRight, CheckCircle2, AlertCircle, ArrowLeft, KeyRound } from 'lucide-react';
 
 const ForgotPassword = () => {
   const { t } = useTranslation();

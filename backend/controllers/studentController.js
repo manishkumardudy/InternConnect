@@ -1,4 +1,4 @@
-const { StudentProfile, User } = require('../models');
+const { StudentProfile } = require('../models');
 
 const getMyProfile = async (req, res) => {
   try {

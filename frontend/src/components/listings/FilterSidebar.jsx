@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Filter } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import useDebounce from '../../hooks/useDebounce';
 
-// value = backend ko jo bhejna hai (English hi rahegi), key = translation ka naam
+// Category value mapped to translation key
 const CATEGORIES = [
   { value: 'Engineering & Technology', key: 'engineering' },
   { value: 'Business & Management', key: 'business' },
@@ -20,12 +20,13 @@ const CATEGORIES = [
 const inputClass = 'w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm';
 const labelClass = 'mb-1.5 block text-sm font-medium text-gray-700';
 
-// filters  : abhi ke saare filter values (URL se aate hain)
-// onChange : filter badalne par call hota hai, e.g. onChange({ type: 'job' })
-// onClear  : "Clear all" button
+// FilterSidebar component props:
+// - filters: active filter values from URL
+// - onChange: handler called when a filter value updates
+// - onClear: handler to reset all filters
 export default function FilterSidebar({ filters, onChange, onClear }) {
   const { t } = useTranslation();
-  // Location box ko live search banane ke liye: 500ms ruk kar hi URL update hoga
+  // Debounce location input for 500ms before triggering URL update
   const [location, setLocation] = useState(filters.location);
   const debouncedLocation = useDebounce(location, 500);
 
@@ -35,7 +36,7 @@ export default function FilterSidebar({ filters, onChange, onClear }) {
     }
   }, [debouncedLocation]);
 
-  // "Clear all" dabane par box bhi khali ho jaye
+  // Keep local location state synchronized with filters
   useEffect(() => {
     setLocation(filters.location);
   }, [filters.location]);

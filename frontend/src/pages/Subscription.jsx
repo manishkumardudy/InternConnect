@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -8,9 +8,7 @@ import {
   CheckCircle2,
   Clock,
   AlertCircle,
-  Sparkles,
   Zap,
-  ShieldCheck,
   CreditCard,
   ArrowRight,
   TrendingUp,

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
-import { Building2, GraduationCap, User, Mail, Lock, ArrowRight } from 'lucide-react';
+import { Building2, GraduationCap, User, Mail, ArrowRight } from 'lucide-react';
 import elevanceLogo from '../assets/elevanceskills_logo.png';
 import AuthCharacters from '../components/auth/AuthCharacters';
+import PasswordInput from '../components/auth/PasswordInput';
 
 const AuthPage = () => {
   const { t } = useTranslation();
@@ -28,12 +29,11 @@ const AuthPage = () => {
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // ---------- Cartoon characters ka mood ----------
-  const [passwordFocused, setPasswordFocused] = useState(false); // password box me cursor hai?
-  const [buttonHover, setButtonHover] = useState(false); // submit button par mouse hai?
+  // Interactive character mood states
+  const [passwordFocused, setPasswordFocused] = useState(false);
+  const [buttonHover, setButtonHover] = useState(false);
 
-  // Priority: password type ho raha ho (sharmate hain) > error (udaas) > button/submit (khush) > normal
-  // (button par mouse aate hi sharmana band, kyunki user ab submit karne wala hai)
+  // Priority: password focus (shy) > error (sad) > submit/hover (happy) > idle
   let mood = 'idle';
   if (passwordFocused && !buttonHover) mood = 'shy';
   else if (errorMessage) mood = 'sad';
@@ -130,10 +130,10 @@ const AuthPage = () => {
       {/* Outer Auth Container (45% Left / 55% Right) */}
       <div className="w-full max-w-6xl overflow-hidden rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xl flex flex-col lg:flex-row min-h-[640px]">
 
-        {/* LEFT PANEL: cartoon characters (sirf bade screen par dikhta hai) */}
+        {/* LEFT PANEL: interactive characters */}
         <div className="hidden lg:flex lg:w-[45%] flex-col justify-between bg-gray-100 p-10">
           <div className="flex flex-1 items-center justify-center">
-            {/* mood badalne par characters ka chehra badal jata hai */}
+            {/* Dynamic character mood representation */}
             <AuthCharacters mood={mood} />
           </div>
 
@@ -224,21 +224,15 @@ const AuthPage = () => {
                       {t('authPage.forgotPasswordLink')}
                     </Link>
                   </div>
-                  <div className="relative">
-                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                      <Lock className="h-4 w-4 text-slate-400" />
-                    </div>
-                    <input
-                      type="password"
-                      required
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      onFocus={() => setPasswordFocused(true)}
-                      onBlur={() => setPasswordFocused(false)}
-                      placeholder="••••••••"
-                      className="block w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 pl-9 pr-3 py-3 text-xs font-semibold text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:border-sky-500 focus:outline-none"
-                    />
-                  </div>
+                  <PasswordInput
+                    withLockIcon
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onFocus={() => setPasswordFocused(true)}
+                    onBlur={() => setPasswordFocused(false)}
+                    placeholder="••••••••"
+                  />
                 </div>
 
                 <button
@@ -370,30 +364,26 @@ const AuthPage = () => {
                         <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
                           {t('authPage.passwordLabel')}
                         </label>
-                        <input
-                          type="password"
+                        <PasswordInput
                           required
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           onFocus={() => setPasswordFocused(true)}
                           onBlur={() => setPasswordFocused(false)}
                           placeholder="••••••••"
-                          className="block w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 px-3 py-2.5 text-xs font-semibold text-slate-800 dark:text-slate-100 focus:border-sky-500 focus:outline-none"
                         />
                       </div>
                       <div>
                         <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
                           {t('authPage.confirmPasswordLabel')}
                         </label>
-                        <input
-                          type="password"
+                        <PasswordInput
                           required
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
                           onFocus={() => setPasswordFocused(true)}
                           onBlur={() => setPasswordFocused(false)}
                           placeholder="••••••••"
-                          className="block w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 px-3 py-2.5 text-xs font-semibold text-slate-800 dark:text-slate-100 focus:border-sky-500 focus:outline-none"
                         />
                       </div>
                     </div>

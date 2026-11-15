@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import api, { getMediaUrl } from '../services/api';
@@ -6,8 +6,8 @@ import { useAuth } from '../context/AuthContext';
 import MockPaymentQR from '../components/MockPaymentQR';
 import {
   FileText, Crown, Plus, Trash2, ShieldCheck, Sparkles, CheckCircle2,
-  AlertCircle, ArrowRight, Lock, Loader2, Download, ExternalLink, X, RefreshCw,
-  CreditCard, QrCode, ChevronRight, Zap
+  AlertCircle, Lock, Loader2, ExternalLink, X, RefreshCw,
+  CreditCard, QrCode, ChevronRight
 } from 'lucide-react';
 
 const ResumeBuilder = () => {

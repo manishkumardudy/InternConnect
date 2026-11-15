@@ -3,14 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---------- Base: poori site ka default look (white / light) ---------- */
+/* ---------- Base Styles (Light Theme) ---------- */
 @layer base {
   body {
     @apply bg-gray-50 text-gray-800 antialiased;
     font-family: 'Inter', system-ui, sans-serif;
   }
 
-  /* Input focus par primary color ki ring */
+  /* Focus ring styling */
   input:focus,
   select:focus,
   textarea:focus {
@@ -18,8 +18,7 @@
   }
 }
 
-/* ---------- Legacy: purane pages abhi ye classes use karte hain ----------
-   Jab hum un pages ko redesign kar lenge, tab ye section delete kar denge. */
+/* ---------- Utility Classes ---------- */
 .card-hover {
   @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
 }
@@ -104,4 +103,56 @@
 .animate-slide-up-fade {
   animation: slideUpFade 0.5s ease-out 0.2s forwards;
   opacity: 0;
+}
+
+/* ---- Publish Post button: shimmer sweep animation ---- */
+@keyframes btn-shimmer {
+  0% {
+    transform: translateX(-120%) skewX(-20deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(220%) skewX(-20deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(220%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+.publish-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.publish-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%) skewX(-20deg);
+  animation: btn-shimmer 2.5s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.publish-btn:disabled::after,
+.publish-btn[disabled]::after {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .publish-btn::after {
+    animation: none;
+  }
 }

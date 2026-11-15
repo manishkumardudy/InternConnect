@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import api, { getMediaUrl } from '../services/api';
-import { Building2, Globe, MapPin, Users, Save, AlertCircle, Image as ImageIcon } from 'lucide-react';
+import { Building2, Save } from 'lucide-react';
 
 const CompanyProfile = () => {
   const { t } = useTranslation();

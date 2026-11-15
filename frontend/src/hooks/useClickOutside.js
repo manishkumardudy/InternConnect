@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 
-// Jab user kisi element (ref) ke bahar click kare, to onOutside() chalao.
-// Dropdown menus band karne ke liye use hota hai.
+// Triggers callback when a click occurs outside the referenced DOM element
 export default function useClickOutside(ref, onOutside) {
   useEffect(() => {
     const handler = (event) => {

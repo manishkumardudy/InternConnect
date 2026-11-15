@@ -12,7 +12,7 @@ const dotenv = require('dotenv');
 // Load environment variables
 dotenv.config();
 
-const { connectDB, isMock } = require('./config/db');
+const { connectDB } = require('./config/db');
 const { initSocket } = require('./config/socket');
 
 const app = express();
@@ -69,7 +69,6 @@ app.use('/api/', apiLimiter);
 app.get('/', (req, res) => {
   res.json({
     message: 'Welcome to the InternConnect API!',
-    mode: isMock() ? 'Zero-Config Local Mode' : 'Production MERN Mode',
     status: 'Running'
   });
 });
@@ -225,7 +224,7 @@ async function start() {
   });
 
   server.listen(PORT, () => {
-    console.log(`[BOOT] PID: ${process.pid} | DB Mode: ${isMock() ? 'LOCAL FALLBACK (BUG!)' : 'ATLAS'} | Server running on port ${PORT}`);
+    console.log(`[BOOT] PID: ${process.pid} | DB: MongoDB Atlas | Server running on port ${PORT}`);
   });
 }
 

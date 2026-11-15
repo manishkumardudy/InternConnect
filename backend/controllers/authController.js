@@ -87,7 +87,7 @@ const register = async (req, res) => {
       password: password || 'defaultpassword'
     });
 
-    // Account ban gaya: ab seedha login karwa do (koi OTP nahi)
+    // Direct login after account creation
     const uaString = req.headers['user-agent'] || '';
     const { browser, os, deviceType } = parseUserAgent(uaString);
     const ipAddress = req.ip || req.connection?.remoteAddress || '';
@@ -119,9 +119,6 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  console.log("BODY:", req.body);
-  console.log("HEADERS:", req.headers["content-type"]);
-
   try {
     const { email, password, firebaseIdToken } = req.body;
     let user = null;
@@ -183,7 +180,7 @@ const login = async (req, res) => {
       }
     }
 
-    // Normal login (Chrome ho ya koi aur browser, ab OTP nahi maangte)
+    // Normal login
     await LoginHistory.create({
       userId: user._id,
       browser, os, deviceType, ipAddress,

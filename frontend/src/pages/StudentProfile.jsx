@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import api, { getMediaUrl } from '../services/api';
 import AutocompleteInput from '../components/AutocompleteInput';
 import {
-  User, School, GraduationCap, MapPin, Code, FileText, CheckCircle,
-  Save, Upload, AlertCircle, History, Tag, X, Plus, Trash2,
+  User, School, Code, FileText, CheckCircle,
+  Save, Upload, History, Tag, X, Plus, Trash2,
   Briefcase, Award, Heart, Compass, Sparkles
 } from 'lucide-react';
 

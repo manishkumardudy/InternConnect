@@ -513,7 +513,13 @@
     "noUsersFound": "कोई उपयोगकर्ता नहीं मिला।",
     "friendsBadge": "मित्र",
     "pendingBadge": "लंबित",
-    "addFriendBtn": "जोड़ें"
+    "addFriendBtn": "जोड़ें",
+    "deletedUser": "हटाया गया उपयोगकर्ता",
+    "mediaUnavailable": "मीडिया अनुपलब्ध",
+    "yourFriends": "आपके मित्र",
+    "addFriendsToUnlock": "पोस्ट अनलॉक करने के लिए मित्र जोड़ें",
+    "dailyPostLimit": "दैनिक पोस्ट सीमा",
+    "postsLeftTodayChip": "आज {{count}} पोस्ट बची हैं"
   },
   "applicantTracker": {
     "backToDashboard": "डैशबोर्ड पर वापस जाएं",
@@ -691,7 +697,9 @@
     "chromeSecurityNotice": "क्रोम ब्राउज़र लॉगिन सत्यापन के लिए आपके पंजीकृत ईमेल पर 6-अंकीय ओटीपी भेजा गया था।",
     "enterOtpLabel": "6-अंकीय ओटीपी दर्ज करें",
     "verifyOtpBtn": "ओटीपी सत्यापित करें और साइन इन करें",
-    "verifying": "सत्यापित हो रहा है..."
+    "verifying": "सत्यापित हो रहा है...",
+    "showPassword": "पासवर्ड दिखाएँ",
+    "hidePassword": "पासवर्ड छिपाएँ"
   },
   "loginRegister": {
     "fillAllFields": "कृपया सभी फ़ील्ड भरें।",

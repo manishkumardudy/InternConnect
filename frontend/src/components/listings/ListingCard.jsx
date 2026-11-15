@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Bookmark, Building2, Calendar, MapPin, Wallet } from 'lucide-react';
@@ -32,7 +31,7 @@ function formatLocation(workMode, location, t) {
   return location;
 }
 
-// Icon + text ki ek line (location, stipend, duration ke liye)
+// Info item with icon and text
 function InfoItem({ icon: Icon, text }) {
   return (
     <span className="flex items-center gap-1.5">
@@ -47,7 +46,7 @@ function InfoItem({ icon: Icon, text }) {
 export default function ListingCard({ listing, isSaved, isApplied, onToggleSave }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const company = listing.companyId || {}; // backend company ki details yahin bhejta hai
+  const company = listing.companyId || {};
   const logo = company.logoUrl ? getMediaUrl(company.logoUrl) : '';
 
   return (

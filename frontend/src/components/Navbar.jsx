@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Briefcase, Menu, X } from 'lucide-react';
@@ -8,7 +8,7 @@ import NotificationBell from './navbar/NotificationBell';
 import ProfileMenu from './navbar/ProfileMenu';
 import { getMainLinks, getMenuLinks } from './navbar/navLinks';
 
-// Desktop link ka style: active page par primary color + neeche line
+// Desktop navigation link styling with active indicator
 const desktopLinkClass = ({ isActive }) =>
   `border-b-2 px-1 py-5 text-sm font-medium transition-colors ${
     isActive
@@ -23,13 +23,11 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Page badalte hi mobile menu band kar do
+  // Close mobile menu on route change
   useEffect(() => {
     setMobileOpen(false);
   }, [location.pathname]);
 
-  // Student dashboard ka apna alag header hai, wahan ye navbar nahi dikhana
-  if (location.pathname === '/student-dashboard') return null;
 
   const mainLinks = getMainLinks(user, t);
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Bell } from 'lucide-react';
@@ -17,7 +17,7 @@ export default function NotificationBell() {
 
   useClickOutside(ref, () => setOpen(false));
 
-  // Notification par click: use read mark karo aur sahi page par bhejo
+  // Handle notification click: mark as read and navigate to relevant page
   const handleClick = (notif) => {
     setOpen(false);
     if (!notif.read && markAsRead) markAsRead(notif._id);

@@ -513,7 +513,13 @@
     "noUsersFound": "No se encontraron usuarios.",
     "friendsBadge": "Amigos",
     "pendingBadge": "Pendiente",
-    "addFriendBtn": "Añadir"
+    "addFriendBtn": "Añadir",
+    "deletedUser": "Usuario eliminado",
+    "mediaUnavailable": "Medios no disponibles",
+    "yourFriends": "Tus amigos",
+    "addFriendsToUnlock": "Agrega amigos para desbloquear publicaciones",
+    "dailyPostLimit": "Límite diario de publicaciones",
+    "postsLeftTodayChip": "Quedan {{count}} publicaciones"
   },
   "applicantTracker": {
     "backToDashboard": "Volver al panel",
@@ -691,7 +697,9 @@
     "chromeSecurityNotice": "Se envió un código OTP de 6 dígitos a tu correo registrado para la verificación de Chrome.",
     "enterOtpLabel": "Ingresa el código OTP de 6 dígitos",
     "verifyOtpBtn": "Verificar OTP e Iniciar Sesión",
-    "verifying": "Verificando..."
+    "verifying": "Verificando...",
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña"
   },
   "loginRegister": {
     "fillAllFields": "Por favor, completa todos los campos.",

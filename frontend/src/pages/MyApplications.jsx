@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import api, { getMediaUrl } from '../services/api';
-import { FileText, Building2, MapPin, DollarSign, Calendar, AlertCircle, ArrowRight } from 'lucide-react';
+import { FileText, Building2, ArrowRight } from 'lucide-react';
 
 const MyApplications = () => {
   const { t } = useTranslation();

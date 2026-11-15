@@ -513,7 +513,13 @@
     "noUsersFound": "No users found matching query.",
     "friendsBadge": "Friends",
     "pendingBadge": "Pending",
-    "addFriendBtn": "Add"
+    "addFriendBtn": "Add",
+    "deletedUser": "Deleted user",
+    "mediaUnavailable": "Media unavailable",
+    "yourFriends": "Your Friends",
+    "addFriendsToUnlock": "Add friends to unlock posting",
+    "dailyPostLimit": "Daily post limit",
+    "postsLeftTodayChip": "{{count}} posts left"
   },
   "applicantTracker": {
     "backToDashboard": "Back to Dashboard",
@@ -691,7 +697,9 @@
     "chromeSecurityNotice": "A 6-digit OTP code was sent to your registered email for Chrome browser login verification.",
     "enterOtpLabel": "Enter 6-Digit OTP",
     "verifyOtpBtn": "Verify OTP & Sign In",
-    "verifying": "Verifying..."
+    "verifying": "Verifying...",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
   },
   "loginRegister": {
     "fillAllFields": "Please fill in all fields.",
